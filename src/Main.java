@@ -32,6 +32,14 @@ public class Main {
 
         System.out.println("New inventory size: "
                 + inventory.size());
+
+        System.out.println("High-Risk Items:");
+
+        for (SupplyCrate crate : inventory) {
+
+            if (crate.isContraband || crate.baseValue > 1000) {
+                System.out.println(crate.itemName);
+            }
+        }
     }
-}
 }
