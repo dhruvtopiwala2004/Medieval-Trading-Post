@@ -1,10 +1,9 @@
-import java.util.ArrayList;
-
 public class Main {
     static void main() {
         System.out.println("Hello World!");
     public static void main(String[] args) {
-        ArrayList<SupplyCrate> inventory = new ArrayList<>();
+
+        TradingPost tradingPost = new TradingPost();
 
         SupplyCrate crate1 =
                 new SupplyCrate("Iron Ore", "Northern Highlands", 500, false);
@@ -18,28 +17,25 @@ public class Main {
         SupplyCrate crate4 =
                 new SupplyCrate("Wheat", "Western Farms", 100, false);
 
-        inventory.add(crate1);
-        inventory.add(crate2);
-        inventory.add(crate3);
-        inventory.add(crate4);
+        tradingPost.addItem(crate1);
+        tradingPost.addItem(crate2);
+        tradingPost.addItem(crate3);
+        tradingPost.addItem(crate4);
 
-        System.out.println("Total items: " + inventory.size());
+        System.out.println("Total items: "
+                + tradingPost.getInventorySize());
 
-        System.out.println("Silk crate position: "
-                + inventory.indexOf(crate2));
+        System.out.println("Silk position: "
+                + tradingPost.findItem(crate2));
 
-        inventory.remove(crate4);
+        tradingPost.printHighRiskItems();
 
-        System.out.println("New inventory size: "
-                + inventory.size());
+        crate2.isReserved = true;
 
-        System.out.println("High-Risk Items:");
+        System.out.println("Silk approved: "
+                + tradingPost.isApproved(crate2));
 
-        for (SupplyCrate crate : inventory) {
-
-            if (crate.isContraband || crate.baseValue > 1000) {
-                System.out.println(crate.itemName);
-            }
-        }
+        System.out.println("Iron Ore approved: "
+                + tradingPost.isApproved(crate1));
     }
 }
